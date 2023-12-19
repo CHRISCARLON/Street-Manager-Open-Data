@@ -18,8 +18,8 @@ Non-Technical
 - Examples of what analysis is possible.
 
 Technical
-- Useful classes and methods for processing and manipulating SMD.
-- Useful scripts for analysing and visualising SMD in an intuitive way.
+- Useful functions for processing and exploring SMD.
+- Useful functions for analysing and visualising SMD in an intuitive way.
 -----------------------------------------------------
 
 ## Navigating the repository
