@@ -37,7 +37,7 @@ def home_page():
     st.subheader('An attempt to make Street Manager Data more accessible')
     st.subheader('Use the side bar to start exploring')
     st.write("Currently running from a MotherDuck database & using Street Manager data from 2023")
-    st.write("check out MotherDuck here: [link](https://motherduck.com/#)")
+    st.write("Check out MotherDuck here: 🦆 [link](https://motherduck.com/#)")
 
 
 def main():
