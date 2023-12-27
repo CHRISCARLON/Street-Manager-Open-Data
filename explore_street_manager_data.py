@@ -19,6 +19,7 @@ def connect_to_motherduck(token, database):
     return quack
 
 
+# Class for creating database queries using SQL
 class ExploreStreetManagerData:
     def __init__(self, quack):
         self.quack = quack
@@ -28,13 +29,13 @@ class ExploreStreetManagerData:
         Fetch records for a randomly selected permit reference number from the database.
 
         Returns:
-        DataFrame: A DataFrame containing the records for a random work reference number.
+        DataFrame: A DataFrame containing the records for a random permit reference number.
         """
         query = """
             SELECT filename, promoter_organisation, highway_authority, 
                    event_type, permit_status, p.permit_reference_number, 
                    work_reference_number, activity_type, work_category, 
-                   work_status_ref, current_traffic_management_type, 
+                   work_status_ref, current_traffic_management_type, is_traffic_sensitive, 
                    promoter_swa_code, highway_authority_swa_code, year, month
             FROM permit_2023 p
             INNER JOIN (
@@ -48,3 +49,19 @@ class ExploreStreetManagerData:
         """
         result = self.quack.sql(query)
         return result.df()
+
+    def get_all_completed_works(self):
+        """
+        Fetch records for all completed works within a given month range.
+
+        Returns:
+        DataFrame: A DataFrame containing the completed works data.
+        """
+        query = """
+        SELECT promoter_organisation, highway_authority, month, year, activity_type, work_category
+        FROM permit_2023
+        WHERE work_status_ref = 'completed'
+        AND month IN (6, 7, 8, 9, 10);
+        """
+        result = self.quack.execute(query)
+        return result.fetchdf()
