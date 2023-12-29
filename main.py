@@ -97,7 +97,7 @@ def main():
     st.set_page_config(layout="wide")
 
     # Navigation
-    page = st.sidebar.radio("**Navigation Bar**", [":house: Home", ":one: High Level overview of Street Manager data",
+    page = st.sidebar.radio("**Navigation Bar**", [":house: Home", ":one: High Level Overview of Street Manager data",
                                                    ":two: Explore Permit Records",
                                                    ":three: Explore Completed Works"])
 
