@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 
 
 def home_page():
-    st.title(':mag_right: Welcome to Street Manager Data Explorer Version 1.1')
+    st.title(':mag_right: Welcome to the Street Manager Data Explorer Version 1.1')
     st.info("""
         **Currently using Street Manager Data from January 23 to October 23**
         \n**Please note that Street Manager only covers :flag-england:**
