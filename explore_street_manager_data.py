@@ -40,7 +40,7 @@ class ExploreStreetManagerData:
             FROM new_table p
             INNER JOIN (
                 SELECT permit_reference_number 
-                FROM permit_2023 
+                FROM new_table
                 ORDER BY RANDOM() 
                 LIMIT 1
             ) AS random_ref
@@ -58,7 +58,7 @@ class ExploreStreetManagerData:
         DataFrame: A DataFrame containing the completed works data.
         """
         query = """
-        SELECT promoter_organisation, highway_authority, month, year, activity_type, work_category
+        SELECT promoter_organisation, highway_authority, month, year, activity_type, work_category, collaborative_working,      
         FROM new_table
         WHERE work_status_ref = 'completed'
         """
