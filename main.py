@@ -90,7 +90,7 @@ def explore_completed_works_sankey_page(data_manager_2):
                                             selected_months, selected_activity_types, selected_work_categories)
         st.plotly_chart(fig)
     else:
-        st.write("Please select filters to view the Sankey diagram.")
+        st.write("Please select filters to view the Sankey diagram!")
 
 
 def main():
