@@ -37,7 +37,7 @@ class ExploreStreetManagerData:
                    work_reference_number, activity_type, work_category, 
                    work_status_ref, current_traffic_management_type, is_traffic_sensitive, 
                    promoter_swa_code, highway_authority_swa_code, year, month
-            FROM permit_2023 p
+            FROM new_table p
             INNER JOIN (
                 SELECT permit_reference_number 
                 FROM permit_2023 
@@ -59,7 +59,7 @@ class ExploreStreetManagerData:
         """
         query = """
         SELECT promoter_organisation, highway_authority, month, year, activity_type, work_category
-        FROM permit_2023
+        FROM new_table
         WHERE work_status_ref = 'completed'
         AND month IN (6, 7, 8, 9, 10, 11);
         """

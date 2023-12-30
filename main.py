@@ -114,7 +114,7 @@ def main():
         my_token = st.secrets['key']
 
         # Initiate the connection
-        get_quacky = connect_to_motherduck(my_token, "new_table")
+        get_quacky = connect_to_motherduck(my_token, "sm_permit")
 
         # Create an instance of ExploreStreetManagerData
         data_manager = ExploreStreetManagerData(get_quacky)
@@ -137,7 +137,7 @@ def main():
         my_token = st.secrets['key']
 
         # Initiate the connection
-        get_quacky_2 = connect_to_motherduck(my_token, "new_table")
+        get_quacky_2 = connect_to_motherduck(my_token, "sm_permit")
 
         # Create an instance of ExploreStreetManagerData
         data_manager_2 = ExploreStreetManagerData(get_quacky_2)
