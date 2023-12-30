@@ -130,8 +130,8 @@ def main():
         \n**Select Local Highway Authorities**: Legal bodies responsible for managing and maintaining the road network 
         within their designated boundary. 
         \n**Select Months**: Filter the data based on the month (1 = January, 2 = February, etc)
-        \n**Select Activity Types**: Description TBC
-        \n**Select Work Category**: Description TBC
+        \n**Select Activity Types**: Description TBC!
+        \n**Select Work Category**: Description TBC!
         """)
         # Define token
         my_token = st.secrets['key']
