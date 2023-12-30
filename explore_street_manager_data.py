@@ -58,7 +58,8 @@ class ExploreStreetManagerData:
         DataFrame: A DataFrame containing the completed works data.
         """
         query = """
-        SELECT promoter_organisation, highway_authority, month, year, activity_type, work_category, collaborative_working      
+        SELECT promoter_organisation, highway_authority, month, year, activity_type, work_category, street_name, 
+        collaborative_working, collaboration_type      
         FROM new_table
         WHERE work_status_ref = 'completed'
         """

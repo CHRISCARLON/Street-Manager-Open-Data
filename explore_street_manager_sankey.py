@@ -51,7 +51,7 @@ def prepare_sankey_data(data):
 
 def prepare_completed_sankey_data(df_completed_works, selected_highway_authorities, selected_months,
                                   selected_activity_types, selected_work_categories,
-                                  figure_height=950, figure_width=1400):
+                                  figure_height=1500, figure_width=1500):
 
     """
     Create an interactive sankey diagram using the returned completed works records.
