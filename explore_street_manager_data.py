@@ -61,7 +61,9 @@ class ExploreStreetManagerData:
         SELECT promoter_organisation, highway_authority, month, year, activity_type, work_category, street_name, 
         collaborative_working, collaboration_type      
         FROM new_table
-        WHERE work_status_ref = 'completed'
+        WHERE 
+        work_status_ref = 'completed' AND
+        month BETWEEN 5 AND 11
         """
         result = self.quack.execute(query)
         return result.fetchdf()
