@@ -79,7 +79,7 @@ def explore_completed_works_sankey_page(data_manager):
 
     # Get unique values for filters directly from df_completed_works
     unique_highway_authorities = df_completed_works['highway_authority'].unique()
-    unique_months = [5, 6, 7, 8, 9, 10, 11]
+    unique_months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
     unique_activity_types = df_completed_works['activity_type'].unique()
     unique_work_categories = df_completed_works['work_category'].unique()
 

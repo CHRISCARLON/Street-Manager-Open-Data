@@ -64,7 +64,7 @@ class ExploreStreetManagerData:
         FROM new_table
         WHERE 
         work_status_ref = 'completed' AND
-        month BETWEEN 5 AND 11
+        month BETWEEN 1 AND 11
         """
         result = self.quack.execute(query)
         return result.fetchdf()
