@@ -1,5 +1,5 @@
 import streamlit as st
-from explore_street_manager_data import ExploreStreetManagerData, connect_to_motherduck
+from explore_street_manager_data import ExploreStreetManagerData, connect_to_motherduck, get_cached_completed_works
 from explore_street_manager_sankey import prepare_sankey_data, prepare_completed_sankey_data
 import plotly.graph_objects as go
 
@@ -74,50 +74,45 @@ def random_data_explore_page(data_manager):
         st.plotly_chart(fig)
 
 
-def explore_completed_works_sankey_page():
-    # Load completed works data into the session state if not already loaded
-    if 'df_completed_works' not in st.session_state:
-        st.session_state['df_completed_works'] = st.session_state['data_manager_2'].get_all_completed_works()
+def explore_completed_works_sankey_page(data_manager):
+    df_completed_works = get_cached_completed_works(data_manager)
 
-    # Get unique values for filters
-    unique_highway_authorities = st.session_state['df_completed_works']['highway_authority'].unique()
+    # Get unique values for filters directly from df_completed_works
+    unique_highway_authorities = df_completed_works['highway_authority'].unique()
     unique_months = [5, 6, 7, 8, 9, 10, 11]
-    unique_activity_types = st.session_state['df_completed_works']['activity_type'].unique()
-    unique_work_categories = st.session_state['df_completed_works']['work_category'].unique()
+    unique_activity_types = df_completed_works['activity_type'].unique()
+    unique_work_categories = df_completed_works['work_category'].unique()
 
     # Sidebar filters
     selected_highway_authorities = st.sidebar.multiselect('Select Highway Authorities', unique_highway_authorities,
                                                           default=unique_highway_authorities[0])
-    selected_months = st.sidebar.multiselect('Select Months', unique_months,
-                                             default=unique_months)
+    selected_months = st.sidebar.multiselect('Select Months', unique_months, default=unique_months)
     selected_activity_types = st.sidebar.multiselect('Select Activity Types', unique_activity_types,
                                                      default=unique_activity_types)
     selected_work_categories = st.sidebar.multiselect('Select Work Categories', unique_work_categories,
                                                       default=unique_work_categories)
 
-    # Check if the selected authorities and other filters are in the current data
-    if not all(auth in unique_highway_authorities for auth in selected_highway_authorities) or \
-       not all(month in unique_months for month in selected_months) or \
-       not all(activity in unique_activity_types for activity in selected_activity_types) or \
-       not all(category in unique_work_categories for category in selected_work_categories):
-        st.session_state['df_completed_works'] = st.session_state['data_manager_2'].get_all_completed_works()
-
     # Display Sankey diagram based on the selected filters
-    if selected_highway_authorities and selected_months and selected_activity_types and selected_work_categories:
-        fig = prepare_completed_sankey_data(st.session_state['df_completed_works'], selected_highway_authorities,
-                                            selected_months, selected_activity_types, selected_work_categories)
+    filtered_data = df_completed_works[
+        (df_completed_works['highway_authority'].isin(selected_highway_authorities)) &
+        (df_completed_works['month'].isin(selected_months)) &
+        (df_completed_works['activity_type'].isin(selected_activity_types)) &
+        (df_completed_works['work_category'].isin(selected_work_categories))
+        ]
+
+    if not filtered_data.empty:
+        fig = prepare_completed_sankey_data(filtered_data, selected_highway_authorities, selected_months,
+                                            selected_activity_types, selected_work_categories)
         st.plotly_chart(fig)
     else:
         st.info("**Please select filters to view the Sankey diagram!**")
 
 
-def search_collaborative_street_works():
-    # Load completed works data into the session state if not already loaded
-    if 'df_completed_works' not in st.session_state:
-        st.session_state['df_completed_works'] = st.session_state['data_manager_2'].get_all_completed_works()
+def search_collaborative_street_works(data_manager):
+    df_completed_works = get_cached_completed_works(data_manager)
 
     # Filter for collaborative works
-    df_collaborative = st.session_state['df_completed_works'][st.session_state['df_completed_works']['collaborative_working'] == 'Yes']
+    df_collaborative = df_completed_works[df_completed_works['collaborative_working'] == 'Yes']
 
     # Display the overall total number of records as a subtitle
     total_records_overall = len(df_collaborative)
@@ -133,7 +128,7 @@ def search_collaborative_street_works():
     top_authority, top_authority_count = authority_counts.idxmax(), authority_counts.max()
     st.write(f'**Most collaborations took place in {top_authority} with {top_authority_count} collaborations**')
 
-    # Get unique values for filters
+    # Get unique values for filters directly from df_collaborative
     unique_highway_authorities = df_collaborative['highway_authority'].unique()
     unique_promoter_organisations = df_collaborative['promoter_organisation'].unique()
     unique_months = df_collaborative['month'].unique()
@@ -150,17 +145,6 @@ def search_collaborative_street_works():
     selected_activity_types = st.sidebar.multiselect('Select Activity Types', unique_activity_types)
     selected_work_categories = st.sidebar.multiselect('Select Work Categories', unique_work_categories)
     selected_street_names = st.sidebar.multiselect('Select Street Names', unique_street_names)
-
-    # Check if the selected options are still valid
-    if not all(auth in unique_highway_authorities for auth in selected_highway_authorities) or \
-       not all(org in unique_promoter_organisations for org in selected_promoter_organisations) or \
-       not all(month in unique_months for month in selected_months) or \
-       not all(year in unique_years for year in selected_years) or \
-       not all(activity in unique_activity_types for activity in selected_activity_types) or \
-       not all(category in unique_work_categories for category in selected_work_categories) or \
-       not all(street in unique_street_names for street in selected_street_names):
-        st.session_state['df_collaborative_works'] = st.session_state['data_manager_2'].get_all_completed_works()
-        df_collaborative = st.session_state['df_collaborative_works'][st.session_state['df_collaborative_works']['collaborative_working'] == 'Yes']
 
     # Apply any filter
     filter_applied = any([
@@ -200,11 +184,9 @@ def search_collaborative_street_works():
 def main():
     st.set_page_config(layout="wide")
 
-    # Load data manager and completed works data only once and store them in session state
-    if 'data_manager_2' not in st.session_state:
-        my_token = st.secrets['key']
-        st.session_state['data_manager_2'] = ExploreStreetManagerData(connect_to_motherduck(my_token, "sm_permit"))
-        st.session_state['df_completed_works'] = st.session_state['data_manager_2'].get_all_completed_works()
+    # Load data manager and completed works data only once
+    my_token = st.secrets['key']
+    data_manager = ExploreStreetManagerData(connect_to_motherduck(my_token, "sm_permit"))
 
     # Sidebar header
     st.sidebar.header("**Navigation Bar**")
@@ -248,11 +230,11 @@ def main():
         \n**Select Activity Types**: For more information visit [DfT's Street Manager business rules](https://department-for-transport-streetmanager.github.io/street-manager-docs/articles/business-rules-version-2-00-works.html#2143-works-categories).
         \n**Select Work Category**: For more information visit [DfT's Street Manager business rules](https://department-for-transport-streetmanager.github.io/street-manager-docs/articles/business-rules-version-2-00-works.html#2143-works-categories). 
         """)
-        explore_completed_works_sankey_page()
+        explore_completed_works_sankey_page(data_manager)
     elif page == "Completed Collaborative Street Works":
         st.title('Completed Collaborative Street works')
         # Call the function for searching collaborative street works
-        search_collaborative_street_works()
+        search_collaborative_street_works(data_manager)
 
 
 if __name__ == "__main__":

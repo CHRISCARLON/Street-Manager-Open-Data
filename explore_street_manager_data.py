@@ -1,9 +1,10 @@
 import duckdb
+import streamlit as st
 
 
 # Quack quack
 
-
+@st.cache_resource
 def connect_to_motherduck(token, database):
     """
     Establishes a MotherDuck connection using a service token.
@@ -67,3 +68,8 @@ class ExploreStreetManagerData:
         """
         result = self.quack.execute(query)
         return result.fetchdf()
+
+
+@st.cache_data(show_spinner=True)
+def get_cached_completed_works(_data_manager):
+    return _data_manager.get_all_completed_works()
