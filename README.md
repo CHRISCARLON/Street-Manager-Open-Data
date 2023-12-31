@@ -3,7 +3,7 @@
 > [!Note]
 > **This is a work in progress.**
 > **Contains public sector information licensed under the Open Government Licence v3.0.**
-> **Please note that The Street Manager Data Explorer is for educational purposes only and does not have the endorsement, affiliation, support or approval of the Secretary of State for Transport.**
+> **Please note that the Street Manager Data Explorer is for educational purposes only and does not have the endorsement, affiliation, support or approval of the Secretary of State for Transport.**
 > **If you notice a bug or want to contribute please email me at StreetManagerExplorer@gmail.com or via GitHub.**
 
 ---
@@ -14,6 +14,8 @@ Streamlit with too much data**
 **Please note that Street Manager only covers England 🏴󠁧󠁢󠁥󠁮󠁧󠁿**
 
 **Archived open data is released by the DfT monthly - data from December 2023 will be available from 01/01/24.**
+
+---
 
 ## What is the Purpose of this Tool?
 
