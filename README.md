@@ -8,12 +8,12 @@
 
 ---
 
-**The tool currently runs using Street Manager Data from May 23 to November 23 - this is due to not being able to overload
-Streamlit with too much data**
+**The tool currently runs using Street Manager Data from January 23 to November 23 - however sometimes this goes above the
+threshold for Streamlit's community cloud due to too much data. As a result, the data available may change**
 
 **Please note that Street Manager only covers England 🏴󠁧󠁢󠁥󠁮󠁧󠁿**
 
-**Archived open data is released by the DfT monthly - data from December 2023 will be available from 01/01/24.**
+**Archived open data is released by the DfT monthly - data from December 2023 will be available from 01/24.**
 
 ---
 
