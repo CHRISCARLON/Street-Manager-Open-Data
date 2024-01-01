@@ -9,7 +9,7 @@
 ---
 
 **The tool currently runs using Street Manager Data from January 23 to November 23 - however sometimes this goes above the
-threshold for Streamlit's community cloud due to too much data. As a result, the data available may change**
+threshold for Streamlit's community cloud due to too much data. As a result, the data available may fluctuate.**
 
 **Please note that Street Manager only covers England 🏴󠁧󠁢󠁥󠁮󠁧󠁿**
 
