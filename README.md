@@ -1,7 +1,7 @@
 # Welcome to the Street Manager Data Explorer
 **This tool provides an easy and accessible way for relevant policy and programme teams to become familiar with Street Manager data without all the hassle.**
 
-**Currently running using gpt-3.5-turbo-16k and Street Manager Data from June 23 to December 23.**
+**Currently running using gpt-3.5 and Street Manager Data from December 23.**
 
 
 
