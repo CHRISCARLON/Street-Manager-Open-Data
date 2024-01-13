@@ -153,6 +153,9 @@ dmypy.json
 cython_debug/
 
 .streamlit/
+cache/
+pandasai.log
+exports/
 
 .DS_Store
 
