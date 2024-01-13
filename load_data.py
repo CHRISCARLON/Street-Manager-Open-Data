@@ -70,7 +70,6 @@ class ExploreStreetManagerData:
             event_type
         FROM permit_2023_final
         WHERE month = 12
-        AND work_status_ref = 'completed'
         """
         result = self.quack.execute(query)
         return result.fetchdf()
