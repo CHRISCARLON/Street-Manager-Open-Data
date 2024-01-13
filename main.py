@@ -25,7 +25,7 @@ def street_chatter(data_manager):
     st.title("**Chat with Street Manager Data**")
     st.write("*This tool provides an easy and accessible way for relevant policy and programme teams to become familiar"
              " with Street Manager data without all the hassle.*")
-    st.info("**Currently running using gpt-3.5-turbo-16k and Street Manager Data from June 23 to December 23.**")
+    st.info("**Currently running using gpt-3.5-turbo-16k and Street Manager Data from December 23.**")
     df = get_cached_completed_works(data_manager)
 
     query = st.text_area("*Please type your message here:*")

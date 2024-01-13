@@ -69,7 +69,7 @@ class ExploreStreetManagerData:
             month,
             event_type
         FROM permit_2023_final
-        WHERE month BETWEEN 6 and 12
+        WHERE month = 12
         """
         result = self.quack.execute(query)
         return result.fetchdf()
