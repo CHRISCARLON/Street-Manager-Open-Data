@@ -42,9 +42,9 @@ def street_chatter(data_manager):
     \nWhat are the unique values for activity type?
     \nIn activity type, how many section 50s were there?
     \nIn activity type, how many section 50s were there and what was the top works promoter for section 50s?
-    \nIn London how many entries are there?
-    \nIn London can you list the total entries for each highway authority in table?
-    \nIn London how many entries are there? Also, using work category how many major entries are there for London?
+    \nIn London, how many entries are there?
+    \nIn London, can you list the total entries for each highway authority in a table?
+    \nIn London, how many entries are there? Also, using work category how many major entries are there for London?
     \nIn London, using work category can you list the total major entries for each highway authority?
     """)
     df = get_cached_completed_works(data_manager)
